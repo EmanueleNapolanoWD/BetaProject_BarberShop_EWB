@@ -84,7 +84,7 @@
 
     <!-- LineDown -->
     @auth
-    @if(Auth::user()->role == 'admin')
+    @if(Auth::user()->isAdmin == '1')
     <div class="container-fluid d-flex align-items-center" id="NavbarLineDown">
         <div class="row w-100 h-100 d-flex justify-content-around">
             <!-- links -->
@@ -121,7 +121,36 @@
             </div>
         </div>
     </div>
-    @elseif (Auth::user()->role == "user")
+    @elseif(Auth::user()->role == 'employee')
+    <div class="container-fluid d-flex align-items-center" id="NavbarLineDown">
+        <div class="row w-100 h-100 d-flex justify-content-around">
+            <!-- links -->
+            <div class="col-12 col-md-6 container-fluid d-flex align-items-center justify-content-around">
+                <div class="row h-100 w-100">
+                    <div class="col-3 d-flex align-items-center justify-content-around">
+                        <a href="{{route('HomePage')}}">
+                            Home
+                        </a>
+                    </div>
+                    <div class="col-3 d-flex align-items-center justify-content-around">
+                        <a href="{{route('showEmployeeAppointments',['id'=>Auth::user()->employee->id])}}">
+                            Reservation
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- searchBar -->
+            <div class="col-12 col-md-4 h-100 d-flex align-items-center justify-content-center">
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    @endif
+    @endauth
+    @guest
     <div class="container-fluid d-flex align-items-center" id="NavbarLineDown">
         <div class="row w-100 h-100 d-flex justify-content-around">
             <!-- links -->
@@ -144,17 +173,9 @@
                     </div>
                 </div>
             </div>
-            <!-- searchBar -->
-            <div class="col-12 col-md-4 h-100 d-flex align-items-center justify-content-center">
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-            </div>
         </div>
     </div>
-    @endif
-    @endauth
+    @endguest
+
 
 </nav>
-

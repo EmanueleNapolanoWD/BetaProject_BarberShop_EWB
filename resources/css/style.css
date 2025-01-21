@@ -102,7 +102,6 @@ header {
 }
 
 /* css fprm */
-/* From Uiverse.io by Praashoo7 */ 
 .formLogIn {
     display: flex;
     flex-direction: column;
@@ -212,3 +211,30 @@ header {
     background-color: red;
     color: white;
   }
+
+
+  /* ------>RESERVATOION<------ */
+
+  #formReservation {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 350px;
+    padding: 20px;
+    border-radius: 20px;
+    position: relative;
+    background-color: #1a1a1a;
+    color: #fff;
+    border: 1px solid #333;
+  }
+
+  .labelReservation {
+    background-color: #333;
+    color: #fff;
+    width: 100%;
+    padding: 20px 05px 05px 10px;
+    outline: 0;
+    border: 1px solid rgba(105, 105, 105, 0.397);
+    border-radius: 10px;
+  }
+  

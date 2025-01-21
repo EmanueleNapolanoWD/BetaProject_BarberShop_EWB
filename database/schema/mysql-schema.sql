@@ -15,7 +15,8 @@ CREATE TABLE `appointments` (
   `user_id` bigint unsigned DEFAULT NULL,
   `employee_id` bigint unsigned NOT NULL,
   `service_id` bigint unsigned NOT NULL,
-  `appointment_date` datetime NOT NULL,
+  `appointment_date` date NOT NULL,
+  `appointment_time` time NOT NULL,
   `start` time NOT NULL DEFAULT '00:00:00',
   `end` time NOT NULL DEFAULT '00:00:00',
   `status` enum('confirmed','cancelled','pending','completed') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
@@ -76,6 +77,7 @@ CREATE TABLE `employees` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `speciality` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` enum('Active','Pause','Inactive') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` bigint unsigned NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -211,7 +213,7 @@ CREATE TABLE `sessions` (
   KEY `sessions_last_activity_index` (`last_activity`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-DROP TABLE IF EXISTS `users`;
+/* DROP TABLE IF EXISTS `users`; */
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
@@ -224,7 +226,8 @@ CREATE TABLE `users` (
   `two_factor_recovery_codes` text COLLATE utf8mb4_unicode_ci,
   `two_factor_confirmed_at` timestamp NULL DEFAULT NULL,
   `cellphone` bigint DEFAULT NULL,
-  `role` enum('admin','user') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'user',
+  `role` enum('user','employee') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'user',
+  `isAdmin` tinyint NOT NULL DEFAULT '0',
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -233,7 +236,6 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;

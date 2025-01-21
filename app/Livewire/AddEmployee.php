@@ -2,47 +2,51 @@
 
 namespace App\Livewire;
 
+use App\Models\User;
+use App\Models\Service;
 use Livewire\Component;
 use App\Models\Employee;
+use Illuminate\Support\Facades\Artisan;
 
 class AddEmployee extends Component
 {
-    public $name;
-    public $phone;
-    public $speciality;
-    public $email;
+   
     public $services;
-    public $service;
+    public $service_id;
+    public $speciality;
     public $employee;
+    public $selectedUser;
+    public $user;
 
-    public function mouth()
-    {
-        
-    }
 
     public function store()
     {
+        $selectedUser = User::find($this->user);
+        $speciality = Service::find($this->service_id);
+
         $this->employee = Employee::create([
-            'name' => $this->name,
-            'phone' => $this->phone,
-            'email' => $this->email,
-            'speciality' => $this->speciality,
+            'name' => $selectedUser->name,
+            'phone' => $selectedUser->cellphone,
+            'email' => $selectedUser->email,
+            'speciality' => $speciality->name,
+            'user_id'=>$selectedUser->id,
         ]);
         session()->flash('success', 'Dipendente aggiunto con successo!');
         $this->cleanForm();
+
+        Artisan::call('app:make-user-employee',['email'=>$selectedUser->email]);
     }
 
     public function cleanForm()
     {
-        $this->name = '';
-        $this->phone = '';
-        $this->email = '';
+        $this->user = '';
         $this->speciality = '';
 
     }
 
     public function render()
     {
-        return view('livewire.add-employee');
+        $usersEmployee = User::all();
+        return view('livewire.add-employee',compact('usersEmployee'));
     }
 }

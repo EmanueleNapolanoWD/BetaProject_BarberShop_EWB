@@ -13,11 +13,10 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->bigInteger('phone');
-            $table->string('email')->nullable();
-            $table->string('speciality')->nullable();
-            $table->enum('status',['Active','Pause','Inactive']);
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('service_id');
+            $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');            $table->enum('status',['Active','Pause','Inactive'])->default('Inactive');
             $table->timestamps();
         });
     }

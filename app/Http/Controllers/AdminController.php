@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Availability;
 use App\Models\Service;
 use App\Models\Employee;
 use Illuminate\Http\Request;

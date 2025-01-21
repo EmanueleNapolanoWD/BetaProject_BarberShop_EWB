@@ -22,24 +22,19 @@
         <div class="col-11 col-md-6 p-5">
             <form wire:submit='store' method="POST">
                 @csrf
-                <div class=" d-flex flex-column align-items-center justify-content-center my-3">
-                    <label for="employee_name">Nome Cognome</label>
-                    <input type="text" wire:model='name' name="employee_name" id="employee_name">
-                </div>
-                <div class=" d-flex flex-column align-items-center justify-content-center my-3">
-                    <label for="employee_phone">Telefono</label>
-                    <input type="tel" wire:model='phone' name="employee_name" id="employee_name">
-                </div>
-                <div class=" d-flex flex-column align-items-center justify-content-center my-3">
-                    <label for="employee_mail">Email</label>
-                    <input type="email" wire:model='email' name="employee_name" id="employee_name">
-                </div>
+                <select wire:model='user' id="">
+                    @foreach($usersEmployee as $user)
+                    <option value="{{$user->id}}">
+                        {{$user->name}}
+                    </option>
+                    @endforeach
+                </select>
                 <div class=" d-flex flex-column align-items-center justify-content-center my-3">
                     <label for="employee_speciality">Specialità</label>
-                    <select wire:model='speciality' id="">
+                    <select wire:model='service_id' id="">
                         @foreach($services as $service)
-                            <option value="{{$service->name}}">{{$service->name}}</option>
-                            @endforeach
+                        <option value="{{$service->id}}">{{$service->name}}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class=" d-flex flex-column align-items-center justify-content-center my-3">

@@ -23,7 +23,8 @@ return new class extends Migration
             $table->foreign('employee_id')->references('id')->on('employees')->onDelete('cascade');
             $table->unsignedBigInteger('service_id');
             $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
-            $table->dateTime('appointment_date');
+            $table->date('appointment_date')->index();
+            $table->time('appointment_time')->index();
             $table->time('start')->default('00:00:00');
             $table->time('end')->default('00:00:00');
             $table->enum('status',['confirmed','cancelled','pending','completed'])->default('pending');

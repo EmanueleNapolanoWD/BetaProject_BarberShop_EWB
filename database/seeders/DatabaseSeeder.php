@@ -18,12 +18,36 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'admin@admin.com',
-            'password' => 'administrator',
-            'role' => 'admin',
-        ]);
+        $users = [
+            [
+                'name' => 'Admin',
+                'email' => 'admin@admin.com',
+                'cellphone'=>'3256987412',
+                'password' => 'administrator',
+            ],
+            [
+                'name' => 'Employee',
+                'email' => 'employee@employee.com',
+                'cellphone'=>'3256987415',
+                'password' => 'dipendente',
+            ],
+            [
+                'name' => 'User',
+                'email' => 'user@user.com',
+                'cellphone'=>'3256987414',
+                'password' => 'clientela',
+            ],
+        ];
+
+        foreach($users as $user){
+            User::create([
+                'name'=>$user['name'],
+                'email'=>$user['email'],
+                'cellphone'=>$user['cellphone'],
+                'password'=>$user['password'],
+            ]);
+        }
+        
 
         $services = [
             [
@@ -84,34 +108,6 @@ class DatabaseSeeder extends Seeder
                 'price' => $service['price'],
             ]);
         }
-
-        $employees =[
-            [
-               'name'=>'Carlo Rossi',
-               'email'=>'Carlo@rossi.com',
-               'phone'=>'3256987412',
-               'speciality'=>'barba',
-               'status'=>'inactive',             
-            ],
-
-             [
-               'name'=>'Mario Verdi',
-               'email'=>'mario@versi.com',
-               'phone'=>'325695945',
-               'speciality'=>'taglio',
-               'status'=>'inactive',
-             ],
-
-        ];
-
-        foreach ($employees as $employee){
-            Employee::create([
-                 'name'=>$employee['name'],
-                 'email'=>$employee['email'],
-                 'phone'=>$employee['phone'],
-                 'speciality'=>$employee['speciality'],
-                 'status'=>$employee['status'],
-            ]);
         }
     }
-}
+

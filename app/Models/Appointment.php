@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Appointment extends Model
 {
-    protected $fillable = ['name','email','cellphone','user_id','employee_id','service_id','appointment_date','start','end','status'];
+    protected $fillable = ['name','email','cellphone','user_id','employee_id','service_id','appointment_date','appointment_time','start','end','status'];
 
     public function users()
     {

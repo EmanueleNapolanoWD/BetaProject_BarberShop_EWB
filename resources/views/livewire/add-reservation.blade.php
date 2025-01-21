@@ -15,12 +15,13 @@
         </div>
         @endif
     </div>
-    <form wire:submit='store' method="POST">
+    <form wire:submit='store' method="POST" id="formReservation">
         @csrf
         @if(!Auth::check())
         <div>
-            <label for="name">Nome</label>
-            <input type="text" wire:model='name' id="">
+            <label for="name">Nome
+                <input type="text" wire:model='name' id="">
+            </label>
             <div class="error">
                 @error('name')
                 <span class="text-danger">{{$message}}</span>
@@ -46,7 +47,7 @@
             </div>
         </div>
         <div>
-            <label for="name">Barbiere</label>
+            <label for="employee">Barbiere</label>
             <select wire:model='employee_id' id="">
                 @foreach ($employees as $employee)
                 <option value="{{$employee->id}}">{{$employee->name}}</option>
@@ -54,7 +55,7 @@
             </select>
         </div>
         <div>
-            <label for="name">Servizio</label>
+            <label for="service_id">Servizio</label>
             <select wire:model='service_id' id="">
                 @foreach ($services as $service)
                 <option value="{{$service->id}}">{{$service->name}}</option>
@@ -62,12 +63,20 @@
             </select>
         </div>
         <div>
-            <label for="name">Data</label>
-            <input type="datetime-local" name="employee" wire:model='appointment_date' id="">
+            <label for="data">Data</label>
+            <input type="date" name="employee" wire:model='appointment_date' id="">
+        </div>
+        <div>
+            <label for="time">Time</label>
+            <select wire:model='appointment_time' id="">
+                @foreach ($hours as $hour)
+                <option value="{{$hour}}">{{$hour}}</option>
+                @endforeach
+            </select>
         </div>
         @else
         <div>
-            <label for="name">Barbiere</label>
+            <label for="employee">Barbiere</label>
             <select wire:model='employee_id' id="">
                 @foreach ($employees as $employee)
                 <option value="{{$employee->id}}">{{$employee->name}}</option>
@@ -80,7 +89,7 @@
             </div>
         </div>
         <div>
-            <label for="name">Servizio</label>
+            <label for="service_id">Servizio</label>
             <select wire:model='service_id' id="">
                 @foreach ($services as $service)
                 <option value="{{$service->id}}">{{$service->name}}</option>
@@ -93,8 +102,14 @@
             </div>
         </div>
         <div>
-            <label for="name">Data</label>
-            <input type="datetime-local" name="employee" wire:model='appointment_date' id="">
+            <label for="data">Data</label>
+            <input type="date" name="employee" wire:model='appointment_date' id="">
+        </div>
+        <div>
+            <label for="time">Time</label>
+            @foreach ($hours as $hour)
+                <option value="{{$hour}}">{{$hour}}</option>
+                @endforeach
         </div>
         @endif
         <button type="submit" class="btn btn-dark">Prenota</button>
