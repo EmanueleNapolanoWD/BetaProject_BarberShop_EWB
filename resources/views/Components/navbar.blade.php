@@ -2,10 +2,12 @@
     <!-- LineUp -->
     <div class="container-fluid" id="NavbarLineUp">
         <div class="row h-100">
-            <div class="col-12 col-md-6 d-flex align-items-center justify-content-center">
-                <img src="./media/LogoBarberWB.png" alt="Logo" width="100px" height="100px">
+            <div class="col-6 d-flex align-items-center justify-content-center">
+                <a href="{{route('HomePage')}}">
+                    <img src="./media/LogoBarberWB.png" alt="Logo" width="100px" height="100px">
+                </a>
             </div>
-            <div class="col-12 col-md-6 container-fluid d-flex align-items-center justify-content-center">
+            <div class="col-6 container-fluid d-flex align-items-center justify-content-center">
                 <div class="row align-items-center justify-content-evenly w-100">
                     <div class="col-4">
                         <div class="d-flex flex-row align-items-center justify-content-center w-100 h-100">
@@ -13,22 +15,22 @@
                                 <path d="M8 1a5 5 0 0 0-5 5v1h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a6 6 0 1 1 12 0v6a2.5 2.5 0 0 1-2.5 2.5H9.366a1 1 0 0 1-.866.5h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 .866.5H11.5A1.5 1.5 0 0 0 13 12h-1a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1V6a5 5 0 0 0-5-5" />
                             </svg>
                             <div>
-                                <p class="m-0 text-light" style="font-size: 1rem;">Call Us</p>
-                                <p class="m-0 text-light" style="font-size: 1rem;">33-333-333-15</p>
+                                <p class="m-0 text-light" style="font-size: 1.1rem;">Call Us</p>
+                                <p class="m-0 text-light" style="font-size: 1.3rem;">33-333-333-15</p>
                             </div>
                         </div>
                     </div>
                     @guest
                     <div class="col-4">
-                        <div class="d-flex flex-column align-items-center justify-content-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-badge" viewBox="0 0 16 16" style="color: white; margin-right: 10px;">
-                                <path d="M6.5 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1zM11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
-                                <path d="M4.5 0A2.5 2.5 0 0 0 2 2.5V14a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2.5A2.5 2.5 0 0 0 11.5 0zM3 2.5A1.5 1.5 0 0 1 4.5 1h7A1.5 1.5 0 0 1 13 2.5v10.795a4.2 4.2 0 0 0-.776-.492C11.392 12.387 10.063 12 8 12s-3.392.387-4.224.803a4.2 4.2 0 0 0-.776.492z" />
-                            </svg>
-                            <a href="{{route('login')}}" class="text-decoration-none mt-2">
-                                Accedi
-                            </a>
-                        </div>
+                        <a href="{{route('login')}}" class="text-decoration-none mt-2">
+                            <div class="d-flex flex-column align-items-center justify-content-center bg-warning" style="height: 50px; width: 50px; border-radius: 50%;">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-badge" viewBox="0 0 16 16" style="color: black;">
+                                    <path d="M6.5 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1zM11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                                    <path d="M4.5 0A2.5 2.5 0 0 0 2 2.5V14a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2.5A2.5 2.5 0 0 0 11.5 0zM3 2.5A1.5 1.5 0 0 1 4.5 1h7A1.5 1.5 0 0 1 13 2.5v10.795a4.2 4.2 0 0 0-.776-.492C11.392 12.387 10.063 12 8 12s-3.392.387-4.224.803a4.2 4.2 0 0 0-.776.492z" />
+                                </svg>
+                            </div>
+                        </a>
                     </div>
                     @endguest
                     @auth
@@ -84,15 +86,17 @@
 
     <!-- LineDown -->
     @auth
-    @if(Auth::user()->isAdmin == '1')
+    @if(Auth::user()->isAdmin == true)
     <div class="container-fluid d-flex align-items-center" id="NavbarLineDown">
         <div class="row w-100 h-100 d-flex justify-content-around">
             <!-- links -->
             <div class="col-12 col-md-6 container-fluid d-flex align-items-center justify-content-around">
                 <div class="row h-100 w-100">
                     <div class="col-3 d-flex align-items-center justify-content-around">
-                        <a href="{{route('HomePage')}}">
-                            Home
+                        <a href="{{route('HomePage')}}" class="text-no-decoration">
+                            <div>
+                                <p class="fs-3 text-light">HOME</p>
+                            </div>
                         </a>
                     </div>
                     <div class="col-3 d-flex align-items-center justify-content-around">
@@ -157,18 +161,24 @@
             <div class="col-12 col-md-6 container-fluid d-flex align-items-center justify-content-around">
                 <div class="row h-100 w-100">
                     <div class="col-3 d-flex align-items-center justify-content-around">
-                        <a href="{{route('HomePage')}}">
-                            Home
+                        <a href="{{route('HomePage')}}" class="text-decoration-none">
+                            <div>
+                                <p class="fs-3 text-light linkNavbarDownGuest" >HOME</p>
+                            </div>
                         </a>
                     </div>
                     <div class="col-3 d-flex align-items-center justify-content-around">
-                        <a href="#">
-                            Our Staff
+                        <a href="{{route('HomePage')}}" class="text-decoration-none">
+                            <div>
+                                <p class="fs-3 text-light linkNavbarDownGuest" >OUR STAFF</p>
+                            </div>
                         </a>
                     </div>
                     <div class="col-3 d-flex align-items-center justify-content-around">
-                        <a href="#">
-                            Contacts
+                        <a href="{{route('HomePage')}}" class="text-decoration-none">
+                            <div>
+                                <p class="fs-3 text-light linkNavbarDownGuest" >CONTACTS</p>
+                            </div>
                         </a>
                     </div>
                 </div>

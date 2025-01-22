@@ -54,6 +54,14 @@ a {
   object-fit: cover;
 }
 
+.linkNavbarDownGuest{
+  border-bottom: 1px solid white;
+  border-right: 1px solid white;
+  padding: 5px;
+  margin-top: 10px;
+
+}
+
 /* ---->HEADER<------ */
 
 header {
