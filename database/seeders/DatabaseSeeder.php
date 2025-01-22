@@ -53,7 +53,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Taglio Uomo',
                 'description' => 'Un taglio moderno e alla moda per uomo.',
-                'duration' => '00:30:00',
+                'duration' => '30',
                 'price' => 15.00,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -61,7 +61,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Barba e Styling',
                 'description' => 'Rifinitura della barba e styling professionale.',
-                'duration' => '00:20:00',
+                'duration' => '30',
                 'price' => 10.00,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -69,7 +69,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Taglio Donna',
                 'description' => 'Taglio personalizzato per donna, con consulenza inclusa.',
-                'duration' => '00:45:00',
+                'duration' => '45',
                 'price' => 25.00,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -77,7 +77,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Piega',
                 'description' => 'Piega con styling professionale.',
-                'duration' => '00:30:00',
+                'duration' => '30',
                 'price' => 12.00,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -85,7 +85,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Colore e Meches',
                 'description' => 'Colorazione personalizzata e meches.',
-                'duration' => '01:30:00',
+                'duration' => '90',
                 'price' => 50.00,
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -93,7 +93,7 @@ class DatabaseSeeder extends Seeder
             [
                 'name' => 'Trattamento Capelli',
                 'description' => 'Trattamento nutriente per capelli danneggiati.',
-                'duration' => '00:40:00',
+                'duration' => '40',
                 'price' => 20.00,
                 'created_at' => now(),
                 'updated_at' => now(),

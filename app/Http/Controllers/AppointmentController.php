@@ -14,7 +14,7 @@ class AppointmentController extends Controller
         $start = Carbon::createFromTime(8, 0); // 08:00
         $end = Carbon::createFromTime(19, 0); // 19:00
         while ($start <= $end) {
-            $hours[] = $start->format('H:i:s');
+            $hours[] = $start->format('H:i');
             $start->addMinutes(30);
         }
 

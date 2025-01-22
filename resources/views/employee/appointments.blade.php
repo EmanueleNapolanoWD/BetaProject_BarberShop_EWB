@@ -15,27 +15,42 @@
                     <tr>
                         <td>{{ $hour }}</td>
                         @foreach ($dates as $date)
-                        <td>
+
+                        @php
+                        $foundAppointment = false;
+                        @endphp
+                        @foreach ($appointments as $appointment)
+                        @php
+                        $appointmentDate = $appointment->appointment_date->format('d-m-Y');
+                        $startTime = $appointment->start;
+                        $endTime = $appointment->end;
+                        @endphp
+                        @if ($hour >= $startTime && $hour <= $endTime && $appointmentDate==$date->format('d-m-Y'))
+                            <td value="{{$date}}">
+                                <span class="text-danger">{{ $appointment->name }}</span>
+                            </td>
                             @php
-                            $matchingAppointments = $appointments->filter(function($appointment) use ($hour, $date) {
-                            return $appointment->appointment_time == $hour && $appointment->appointment_date->isSameDay($date);
-                            });
+                            $foundAppointment = true;
                             @endphp
-                            @if ($matchingAppointments->isNotEmpty())
-                            <!-- Mostra tutti gli appuntamenti corrispondenti -->
-                            @foreach ($matchingAppointments as $appointment)
-                            <span class="text-danger">{{ $appointment->name }}</span><br>
-                            @endforeach
-                            @else
-                            <button class="btn btn-success">Prenota</button>
+                            @break
                             @endif
-                        </td>
-                        @endforeach
+                            @endforeach
+                            @if (!$foundAppointment)
+                            <td value="{{$date}}">
+                                <div value="{{$hour}}">
+                                
+                                    <a href="{{ route('create_reservation_from_employee',[$date->format('d-m-Y'),$hour]) }}">
+                                        <button class="btn btn-success">Prenota</button>
+                                    </a>
+                                </div>
+                            </td>
+                            @endif
+
+                            @endforeach
                     </tr>
                     @endforeach
                 </tbody>
             </table>
-
         </section>
     </main>
 </x-layout>
