@@ -21,4 +21,6 @@ class AppointmentController extends Controller
         $employees = Employee::all();
         return view ('reservation.create_reservation',compact('employees','hours'));
     }
+
+   
 }

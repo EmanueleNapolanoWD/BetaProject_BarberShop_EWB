@@ -17,7 +17,7 @@ Route::get('/admin/reservation',[AdminController::class,'admin_reservation'])->n
 
 // employee route
 Route::get('/employee/{id}/reservations',[EmployeeController::class,'showAppointments'])->name('showEmployeeAppointments');
-Route::get('/employee/reservation/{date}/{hour}',[EmployeeController::class,'create_reservation_from_employee'])->name('create_reservation_from_employee');
+Route::get('/employee/{id}/reservation/{date}/{hour}',[EmployeeController::class,'create_reservation_from_employee'])->name('create_reservation_from_employee');
 
 // reservation route
 Route::get('/reservation',[AppointmentController::class,'create_reservation'])->name('create_reservation');

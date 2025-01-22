@@ -37,9 +37,8 @@
                             @endforeach
                             @if (!$foundAppointment)
                             <td value="{{$date}}">
-                                <div value="{{$hour}}">
-                                
-                                    <a href="{{ route('create_reservation_from_employee',[$date->format('d-m-Y'),$hour]) }}">
+                                <div value="{{$hour}}">                                
+                                    <a href="{{ route('create_reservation_from_employee',[$id,$date->format('d-m-Y'),$hour]) }}">
                                         <button class="btn btn-success">Prenota</button>
                                     </a>
                                 </div>

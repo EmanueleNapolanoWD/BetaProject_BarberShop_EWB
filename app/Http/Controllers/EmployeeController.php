@@ -14,7 +14,7 @@ class EmployeeController extends Controller
         $appointments = Appointment::where('employee_id', $id)
             ->whereDate('appointment_date', '>=', now()->toDateString())
             ->get();
-            
+
         foreach ($appointments as $appointment) {
             $appointment->appointment_date = Carbon::parse($appointment->appointment_date);
         }
@@ -32,11 +32,11 @@ class EmployeeController extends Controller
             $start->addMinutes(30);
         }
 
-        return view('employee.appointments', compact('appointments', 'dates', 'hours'));
+        return view('employee.appointments', compact('appointments', 'dates', 'hours', 'id'));
     }
 
-    public function create_reservation_from_employee($date,$hour)
+    public function create_reservation_from_employee($id, $date, $hour)
     {
-        return view('reservation.create_reservation',compact('date','hour'));
+        return view('reservation.create_reservation_from_employee', compact('id', 'date', 'hour'));
     }
 }

@@ -3,14 +3,13 @@
 namespace App\Livewire;
 
 use Carbon\Carbon;
-use App\Models\User;
 use App\Models\Service;
 use Livewire\Component;
 use App\Models\Appointment;
 use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\Auth;
 
-class AddReservation extends Component
+class EmployeeReservation extends Component
 {
     #[Validate('required|min:3|max:50')]
     public $name;
@@ -21,46 +20,23 @@ class AddReservation extends Component
     public $user_id;
     public $service_id;
     public $employee_id;
-    public $employees;
-    public $appointment_date;
-    public $appointment_time;
-    public $appointment_date_from_employee;
-    public $appointment_time_from_employee;
+    public $date;
+    public $hour;
     public $appointment;
     public $user;
     public $hours;
 
-    public function mouth()
-    {
-        $hours = [];
-        $start = Carbon::createFromTime(8, 0); // 08:00
-        $end = Carbon::createFromTime(19, 0); // 19:00
-        while ($start <= $end) {
-            $hours[] = $start->format('H:i');
-            $start->addMinutes(30);
-        }
-    }
 
 
     public function store()
     {
-        if (Auth::check()) {
-            $this->user_id = Auth::user()->id;
-            $this->name =  Auth::user()->name;
-            $this->cellphone = Auth::user()->cellphone;
-            $this->email = Auth::user()->email;
 
-            if (Auth::user()->role == 'employee') {
-
-                $this->employee_id = Auth::user()->employee->id;
-                $this->appointment_date = $this->appointment_date_from_employee;
-                $this->appointment_time = $this->appointment_time_from_employee;
-            }
-        }
-
-        $start_time = Carbon::createFromFormat('H:i', $this->appointment_time);
+        $this->employee_id = Auth::user()->employee->id;
+        $start_time = Carbon::createFromFormat('H:i', $this->hour);
         $service = Service::find($this->service_id);
         $end_time = $start_time->copy()->addMinutes($service->duration);
+        $this->date = Carbon::createFromFormat('d-m-Y', $this->date)->format('Y-m-d');
+
 
         if (!$service) {
             session()->flash('error', 'Servizio non valido.');
@@ -69,7 +45,7 @@ class AddReservation extends Component
 
         // Controlla sovrapposizione
         $overlap = Appointment::where('employee_id', $this->employee_id)
-            ->where('appointment_date', $this->appointment_date)
+            ->where('appointment_date', $this->date)
             ->where(function ($query) use ($start_time, $end_time) {
                 $query->whereBetween('start', [$start_time, $end_time])
                     ->orWhereBetween('end', [$start_time, $end_time])
@@ -91,8 +67,8 @@ class AddReservation extends Component
             'email' => $this->email,
             'employee_id' => $this->employee_id,
             'service_id' => $this->service_id,
-            'appointment_date' => $this->appointment_date,
-            'appointment_time' => $this->appointment_time,
+            'appointment_date' => $this->date,
+            'appointment_time' => $this->hour,
             'start' => $start_time->format('Y-m-d H:i:s'),
             'end' => $end_time->format('Y-m-d H:i:s'),
         ]);
@@ -100,7 +76,6 @@ class AddReservation extends Component
 
     public function render()
     {
-        $hours = $this->hours;
-        return view('livewire.add-reservation', compact('hours'));
+        return view('livewire.employee-reservation');
     }
 }
